@@ -1,8 +1,10 @@
 name: "🚀 release"
 
 on:
-    release:
-        types: [published]
+    push:
+      branches: [ main ]
+    pull_requests:
+      branches: '*'
 
 jobs:
     release:
