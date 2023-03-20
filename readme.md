@@ -100,4 +100,4 @@ console.log(mem)
  * }
  */
 ```
-More Examples Comming Soon.
+More Examples Coming Soon.
