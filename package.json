@@ -9,6 +9,10 @@
   "scripts": {
     "test": "node ."
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ItzCrazyKns/servius.git"
+  },
   "keywords": [
     "psutils",
     "nsutils",
