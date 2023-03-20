@@ -1,18 +1,34 @@
-const shelljs = require("shelljs");
+const shelljs = require("shelljs")
 
 //System Start
 const uptime = () => {
-    let time = shelljs.exec(`uptime -p`, {silent: true}).stdout.replace('up', '').trim()
-    return time
+    let time = shelljs.exec('cat /proc/uptime', {silent: true}).stdout.trim()
+    time = time.split(' ')[0]
+    return formatTime(time)
 }
 
 const getOS = () => {
-    let distributor = shelljs.exec("lsb_release -a | awk -F'\t' '/^Distributor ID:/ {print $2}'", {silent: true}).stdout.trim()
-    let pretty_name = shelljs.exec("lsb_release -a | awk -F'\t' '/^Description:/ {print $2}'", {silent: true}).stdout.trim()
-    let release = shelljs.exec("lsb_release -a | awk -F'\t' '/^Release:/ {print $2}'", {silent: true}).stdout.trim()
-    let release_codename = shelljs.exec("lsb_release -a | awk -F'\t' '/^Codename:/ {print $2}'", {silent: true}).stdout.trim()
-
-    return JSON.parse(JSON.stringify({distributor: distributor, name: pretty_name, version: release, codename: release_codename }))
+    const osd = {}
+    let details = shelljs.exec('cat /etc/*release', {silent: true}).stdout.trim()
+    details = details.split('\n')
+    details.forEach(line => {
+        const [key, value] = line.split('=')
+        switch (key) {
+          case 'DISTRIB_ID':
+            osd.distributor = value
+            break
+          case 'PRETTY_NAME':
+            osd.pretty_name = value.replace(/"/g, '').trim()
+            break
+          case 'DISTRIB_RELEASE':
+            osd.version = value
+            break
+          case 'DISTRIB_CODENAME':
+            osd.codename = value.trim()
+            break
+        }
+      })
+      return JSON.parse(JSON.stringify({distributor: osd.distributor, name: osd.pretty_name, version: osd.version, codename: osd.codename }))
 }
 
 const bootTime = (raw) => {
@@ -37,3 +53,30 @@ const getUsers = () => {
 //System End
 
 module.exports = {getUsers, bootTime, getOS, uptime}
+
+// Handlers
+const formatTime = (seconds) => {
+    let years = Math.floor(seconds / 31536000)
+    seconds %= 31536000
+    let months = Math.floor(seconds / 2592000)
+    seconds %= 2592000
+    let weeks = Math.floor(seconds / 604800)
+    seconds %= 604800
+    let days = Math.floor(seconds / 86400)
+    seconds %= 86400
+    let hours = Math.floor(seconds / 3600)
+    seconds %= 3600
+    let minutes = Math.floor(seconds / 60)
+    seconds %= 60
+  
+    let result = ""
+    if (years > 0) result += `${years} year${years > 1 ? 's' : ''}, `
+    if (months > 0) result += `${months} month${months > 1 ? 's' : ''}, `
+    if (weeks > 0) result += `${weeks} week${weeks > 1 ? 's' : ''}, `
+    if (days > 0) result += `${days} day${days > 1 ? 's' : ''}, `
+    if (hours > 0) result += `${hours} hour${hours > 1 ? 's' : ''}, `
+    if (minutes > 0) result += `${minutes} minute${minutes > 1 ? 's' : ''}, `
+    
+    return result.slice(0, -2)
+}
+  

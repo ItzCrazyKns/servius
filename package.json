@@ -1,6 +1,6 @@
 {
   "name": "servius",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Servius is a comprehensive npm package for server monitoring,providing tracking of CPU load, free memory, disk usage, process count, and other important system resources. It also offers details on CPU, server uptime, last boot time, OS, disk partitions,process management and More.",
   "main": "index.js",
   "dependencies": {
@@ -8,10 +8,6 @@
   },
   "scripts": {
     "test": "node ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ItzCrazyKns/servius.git"
   },
   "keywords": [
     "psutils",

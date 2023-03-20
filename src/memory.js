@@ -1,14 +1,5 @@
 const shelljs = require("shelljs");
 
-const bytestohuman = (bytes) => {
-    const sizes = ['KB', 'MB', 'GB', 'TB'];
-    if (bytes == 0) return '0 B';
-    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-    const size = bytes / Math.pow(1024, i);
-    const formattedSize = parseFloat(size.toFixed(2));
-    return `${formattedSize} ${sizes[i]}`;
-}
-
 // Memory Start 
 const VirtualMemory = (raw) => {
     raw = raw || false
@@ -38,3 +29,14 @@ const SwapMemory = (raw) => {
 // Memory End
 
 module.exports = { SwapMemory, VirtualMemory}
+
+// Handlers
+
+const bytestohuman = (bytes) => {
+    const sizes = ['KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 B';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    const size = bytes / Math.pow(1024, i);
+    const formattedSize = parseFloat(size.toFixed(2));
+    return `${formattedSize} ${sizes[i]}`;
+}
