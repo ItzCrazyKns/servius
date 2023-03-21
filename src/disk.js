@@ -23,7 +23,7 @@ const DiskPart = () => {
     })
   
     return part
-  }
+}
 
 // Disk End
 

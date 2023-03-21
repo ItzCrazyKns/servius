@@ -20,7 +20,7 @@ const cpuTimes = () => {
     return JSON.parse(JSON.stringify({user: user, system: sys, nice: nice, idle: idle, steal: steal}))
 }
 
-/* Returns A The Number Of Logical Cpu Cores.
+/* Returns The Number Of Logical Cpu Cores.
 * Ex- 4
 */
 

@@ -100,4 +100,129 @@ console.log(mem)
  * }
  */
 ```
-More Examples Coming Soon.
+### Swap Memory
+```js
+const servius = require('servius')
+
+/* The `SwapMemory` function retrieves information about the swap memory usage of the current system. The output includes the total amount of swap memory available, the amount of swap memory currently used, and the amount of swap memory currently available for use, as well as additional information about shared, cached memory, and availability.
+
+This function can be useful for monitoring system performance and diagnosing issues related to memory usage. It provides information about the usage of swap memory, which is used when physical memory is full or when a process needs more memory than is physically available. */
+
+const swapmem = servius.SwapMemory(false) // here raw is false
+
+console.log(swapmem)
+
+/* Example Output => 
+ * {
+ *     total: '0',
+ *     used: '0',
+ *     free: '0',
+ *     shared: '0',
+ *     chached: '0',
+ *     available: '0'
+ * }
+ * **Note** This Only Works With System That Have Swap Enabled Otherwise It Will Return `0`
+ */ 
+```
+
+## Disk
+### VirtualDisk
+```js
+const servius = require('servius')
+
+/* The `VirtualDisk` function retrieves information about the usage of the disk space of the current system, including the total amount of disk space available, the amount of disk space currently used, the amount of disk space available for use, and the percentage of disk space used. This function can be useful for monitoring disk space usage and diagnosing issues related to storage. */
+
+const disk = servius.VirtualDisk(false) // here raw is false
+
+console.log(disk)
+
+/* Example Output => 
+ * {
+ *    total: '496.03 GB',
+ *    used: '96.34 GB',
+ *    available: '399.68 GB',
+ *    used_perc: '20%'
+ * }
+ */ 
+```
+### DiskPart
+```js
+const servius = require('servius')
+
+/* The `DiskPart` function retrieves information about the disk partitions on the current system, including the partition name, filesystem type, size, and mount point. This function can be useful for inspecting the available disk space and identifying the location of specific files or directories. */
+
+const diskpart = servius.DiskPart()
+
+console.log(diskpart)
+
+/* Example Output => 
+ * [
+  {
+    name: 'sda',
+    fstype: 'hfs',
+    size: 512G,
+    mountpoint: /dev
+  },
+  {
+    name: 'sda1',
+    fstype: 'hfs',
+    size: '511.9G',
+    mountpoint: /etc/hosts
+  }
+]
+ */ 
+```
+## Cpu
+### cpuTimes
+```js
+const servius = require('servius')
+
+/* Returns a Object That Contains The Time Taken By Cpu To Execute a Specefic Process. */
+
+const cputimes = servius.cpuTimes()
+
+console.log(cputimes)
+
+/* Example Output => 
+* {
+*     user: '73.80',
+*     system: '0.00',
+*     nice: '0.00',
+*     idle: '0.00',
+*     steal: '0.00'
+*  }*/ 
+```
+### cpuCount
+```js
+const servius = require('servius')
+
+/* Returns the number of the logical cpu cores. */
+
+const cpucount = servius.cpuCount()
+
+console.log(cpucount)
+
+/* Example Output => 
+* 16
+*/
+```
+
+### cpu
+```js
+const servius = require('servius')
+
+/* The cpu function retrieves information about the CPU of the current system, including the CPU name, CPU speed, number of cores, and load average. This function can be useful for monitoring system performance and diagnosing issues related to CPU usage. */
+
+const cpuinf = servius.cpu()
+
+console.log(cpuinf)
+
+/* Example Output => 
+* {
+*     name: 'Intel(R) Core(TM) i5 CPU 12400F @ 4.40GHz',
+*     speed: 2826,
+*     cores: 8,
+*     loadAvg: [ 0.1, 0.2, 0.1]
+*  }
+*/
+```
