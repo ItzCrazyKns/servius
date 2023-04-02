@@ -92,12 +92,12 @@ console.log(mem)
 /* Example Output => 
  * {
  *     total: '31.87 GB',
- *     used: '5.29 GB',
  *     free: '15.89 GB',
  *     shared: '29.83 MB',
  *     chached: '3.82 GB',
  *     available: '22.76 GB'
  * }
+ * Note: `Used` Has Been Removed For A While Will Be Added In Future Versions
  */
 ```
 ### Swap Memory
